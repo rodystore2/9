@@ -1,0 +1,123 @@
+<html manifest="offlinexmb.cache">
+<head>
+<title>PSFree-Lapse Exploit For 9.00</title>
+<style>
+body {
+  background: linear-gradient(to bottom right, #063FAB, #01258A);
+  color: white;
+  font-size: 28px;
+  text-align: center;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+}
+.progress-container {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
+}
+.progress-bar {
+  height: 30px;
+  background: linear-gradient(to right, #00b300, #00ff00);
+  width: 0%;
+  border-radius: 7px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 24px;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+.pulse {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+</style>
+<script>
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){
+  Percent = Math.round(e.loaded / e.total * 100);
+  document.getElementById("progress-value").style.width = Percent + "%";
+  msgs.innerHTML = "Installing Offline Cache: " + Percent + "%";
+  
+  if (Percent < 30) {
+    document.getElementById("status-message").innerHTML = "Downloading exploit files...";
+  } else if (Percent < 60) {
+    document.getElementById("status-message").innerHTML = "Preparing exploit components...";
+  } else if (Percent < 90) {
+    document.getElementById("status-message").innerHTML = "Finalizing installation...";
+  } else {
+    document.getElementById("status-message").innerHTML = "Almost done...";
+  }
+};
+function DisplayCacheProgress(){
+  setTimeout(function(){
+    msgs.innerHTML = "Cache Installed Successfully!";
+    document.getElementById("progress-value").style.width = "100%";
+    document.getElementById("progress-value").style.background = "linear-gradient(to right, #00b300, #00ff00)";
+    document.getElementById("status-message").innerHTML = "Redirecting to exploit page...";
+  }, 1000);
+  setTimeout(function(){
+    location.reload();
+  }, 3000);
+}
+window.applicationCache.addEventListener("progress", DLProgress, false);
+window.applicationCache.oncached = function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready = function(e){DisplayCacheProgress();};
+</script>
+</head>
+<body>
+<div class="container">
+  <div class="title">PSFree-Lapse Exploit</div>
+  <div class="subtitle">For PlayStation 4 9.00</div>
+  <div id="msgs" class="pulse">Preparing Cache...</div>
+  <div class="progress-container">
+    <div id="progress-value" class="progress-bar"></div>
+  </div>
+  <div id="status-message" style="margin-top: 20px; font-size: 18px; opacity: 0.8;">Please wait while the exploit is being cached...</div>
+  <div style="margin-top: 40px; font-size: 16px;">
+    <span id="tip" style="opacity: 0.7;"></span>
+  </div>
+</div>
+
+<script>
+  // Display random tips during loading
+  const tips = [
+    "Keep your PS4 connected during the entire process",
+    "This exploit works on PS4 firmware 9.00 only",
+    "Make sure to close all applications before running the exploit",
+    "For best results, restart your PS4 before using this exploit",
+    "If the exploit fails, try again after restarting your browser"
+  ];
+  
+  function showRandomTip() {
+    const randomIndex = Math.floor(Math.random() * tips.length);
+    document.getElementById("tip").textContent = "Tip: " + tips[randomIndex];
+  }
+  
+  showRandomTip();
+  setInterval(showRandomTip, 5000);
+</script>
+</body>
+</html>
